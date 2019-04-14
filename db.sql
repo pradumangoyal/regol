@@ -86,6 +86,9 @@ CREATE TABLE IF NOT EXISTS `regol`.`student` (
   `batch_id` INT NULL,
   `bhawan_name` VARCHAR(15) NULL,
   `room_number` VARCHAR(10) NULL,
+  `bank_name` VARCHAR(50) NULL, 
+  `account_number` VARCHAR(50) NULL,
+  `physical_disability` VARCHAR(50) NULL,
   PRIMARY KEY (`enrollment_no`),
   CONSTRAINT `person_id`
     FOREIGN KEY (`person_id`)
@@ -126,7 +129,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `regol`.`personal_info` (
   `person_id` INT NOT NULL UNIQUE,
   `name` VARCHAR(45) NULL,
-  `date_of_birth` VARCHAR(45) NULL,
+  `date_of_birth` DATE NULL,
+  `gender` VARCHAR(10),
   `phone_number` VARCHAR(10) NULL,
   `permanent_address` VARCHAR(200) NULL,
   `category` VARCHAR(10) NULL,
