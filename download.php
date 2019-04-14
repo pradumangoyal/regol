@@ -32,7 +32,20 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 </nav>
 
 <div class="container">
-        <form action="card/stu_card.php" method="post">
+        <form action="card/card.php" method="post">
+          <div class="form-group">
+            <label>Category</label>
+            <select name="category">
+              <option value="hostel">Hostel</option>
+              <option value="mess">Mess</option>
+              <option value="ccb">CCB</option>
+              <option value="accounts">Accounts</option>
+              <option value="student">Student</option>
+              <option value="dosw">DOSW</option>
+              <option value="bank">Bank</option>
+
+            </select>
+          </div>
             <div class="form-group">
                 <label>Enrollment No.</label>
                 <input type="text" name="enrollment" class="form-control">

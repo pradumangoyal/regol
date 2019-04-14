@@ -25,10 +25,10 @@ if ($result->num_rows > 0){
 		$sinfo = $row;
 	}
 }
+$en=$_POST["Enno"];
+$id=$sinfo["person_id"];
 
-$en=$sinfo["person_id"];
-
-$sql = "SELECT * FROM PERSONAL_INFO where person_id=". $en.";";
+$sql = "SELECT * FROM PERSONAL_INFO where person_id=". $id.";";
 $result1 = $conn->query($sql);
 if ($result1->num_rows > 0) { 
 	while($row1 = $result1->fetch_assoc()) {
@@ -78,6 +78,7 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 	</form>
 
 	<form method="POST" action="submitted.php">
+		Enrollment No: <input type='text' name="enrollment" value= "<?php echo $_POST["Enno"] ?>" />
 		<div>
 			<table>
 				<tr>

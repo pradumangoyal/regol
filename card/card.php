@@ -6,6 +6,15 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
     exit;
 }
 
+$card_type = array(
+    "hostel" => "Hostel Copy",
+    "ccb" => "CCB Copy",
+    "mess" => "Mess Copy",
+    "accounts" => "Accounts Copy",
+    "student" => "Students Copy",
+    "dosw" => "DOSW Copy",
+    "bank" => "Bank Copy",
+);
 
 $servername = "localhost";
 $username = "regol";
@@ -64,14 +73,14 @@ if ($result1->num_rows > 0) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Student Copy</title>
+    <title><?php echo $card_type[$_POST["category"]] ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/card.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/card.css" media="print" />
 </head>
 
 <body>
-    <div class='a4-page'>
+    <div class='a4-page <?php echo $_POST["category"] ?>'>
         <div class='title'>
             <div class='title_heading_container'>
                 <span class="title_heading">Registration Card</span>
@@ -81,7 +90,7 @@ if ($result1->num_rows > 0) {
                 <div class='insti_branding_text'>
                     <div class='insti_name'>Indian Institute of Technology Roorkee</div>
                     <div class="sem_info">AUTUMN/SPRING SEMESTER REGISTRATION FOR 20....... - 20......</div>
-                    <div class="which_card">Student copy</div>
+                    <div class="which_card"><?php echo $card_type[$_POST["category"]] ?></div>
                 </div>
             </div>
             <div>Enrollment No. <span class='fill-box-container'>

@@ -16,18 +16,22 @@ if ($conn->connect_error) {
 if ($conn->query($sql) === TRUE) {
     echo "";
 } else {
-    echo "Error creating database: " . $conn->error;
+    echo "Error creating database: ".$conn->error;
 }
-$pdetails = $_POST["pdeatils"];
-$sdetails = $_POST["sdeatils"];
+$sdetails=" ";
+$pdetails=" ";
+if(isset($_POST["pdetails"]))
+	$pdetails = $_POST["pdetails"];
+if(isset($_POST["sdetails"]))
+	$sdetails = $_POST["sdetails"];
 if($pdetails == "on")
 {
-	$sql="UPDATE VERIFIED SET PERSONAL_INFO='1' WHERE ENROLLMENT_NO=".$POST["Enno"].";";
+	$sql="UPDATE VERIFIED SET PERSONAL_INFO='1' WHERE ENROLLMENT_NO=".$_POST["enrollment"].";";
 	$conn->query($sql);
 }
 if($sdetails == "on")
 {
-	$sql="UPDATE VERIFIED SET STUDENT_INFO='1' WHERE ENROLLMENT_NO=".$POST["Enno"].";";
+	$sql="UPDATE VERIFIED SET STUDENT_INFO='1' WHERE ENROLLMENT_NO=".$_POST["enrollment"].";";
 	$conn->query($sql);
 }
 if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
