@@ -167,3 +167,32 @@ body {
     align-items: flex-end;
     margin-left: 2cm;
 }
+
+
+.mess {
+    background: #FFFACD;
+}
+
+.ccb {
+    background: #ADFF2F;
+}
+
+.dosw {
+   background: #89cff0;
+}
+
+.bank {
+    background: #fca3b7;
+}
+
+.student {
+    background: white;
+}
+
+.accounts {
+    background: wheat;
+}
+
+.hostel {
+    background: #efbbff;
+}
