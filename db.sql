@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `regol`.`personal_info` (
   `date_of_birth` DATE NULL,
   `gender` VARCHAR(10),
   `phone_number` VARCHAR(10) NULL,
+  `email_address` VARCHAR(50) NULL,
   `permanent_address` VARCHAR(200) NULL,
   `category` VARCHAR(10) NULL,
   `blood_group` VARCHAR(3) NULL,
