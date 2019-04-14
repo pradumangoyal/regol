@@ -32,7 +32,7 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 </nav>
 
 <div class="container">
-        <form action="cards.php" method="post">
+        <form action="card/stu_card.php" method="post">
             <div class="form-group">
                 <label>Enrollment No.</label>
                 <input type="text" name="enrollment" class="form-control">

@@ -1,3 +1,63 @@
+<?php 
+session_start();
+
+if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
+
+$servername = "localhost";
+$username = "regol";
+$password = "regol";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} $sql = "USE regol";
+if ($conn->query($sql) === TRUE) {
+    echo "";
+} else {
+    echo "Error creating database: " . $conn->error;
+}
+$sql = "SELECT * FROM STUDENT where enrollment_no=". $_POST["enrollment"]. ";";
+$result = $conn->query($sql);
+if ($result->num_rows > 0){ 
+	while($row = $result->fetch_assoc()) {
+		$sinfo = $row;
+	}
+} else {
+    header("location: download.php");
+	exit;
+}
+
+$person_id=$sinfo["person_id"];
+$course_id=$sinfo["course_id"];
+
+$sql = "SELECT * FROM PERSONAL_INFO where person_id=". $person_id.";";
+$result1 = $conn->query($sql);
+if ($result1->num_rows > 0) { 
+	while($row1 = $result1->fetch_assoc()) {
+		$pinfo = $row1;
+	}
+}
+
+$sql = "SELECT * FROM course where course_id=". $course_id.";";
+$result1 = $conn->query($sql);
+if ($result1->num_rows > 0) { 
+	while($row1 = $result1->fetch_assoc()) {
+		$cinfo = $row1;
+	}
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -25,12 +85,12 @@
                 </div>
             </div>
             <div>Enrollment No. <span class='fill-box-container'>
-                    <span class='fill-box'>3</span>
-                    <span class='fill-box'>1</span>
-                    <span class='fill-box'>2</span>
-                    <span class='fill-box'>0</span>
-                    <span class='fill-box'>2</span>
-                    <span class='fill-box'>0</span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[2] ?></span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[3] ?></span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[4] ?></span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[5] ?></span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[6] ?></span>
+                    <span class='fill-box'><?php echo str_split($_POST["enrollment"] , 1)[7] ?></span>
                 </span>
             </div>
         </div>
@@ -40,28 +100,28 @@
                     <li class='field_container'>
                         <div class='field-11'>
                             <span class='field_heading'>Full Name (in Capital Letters): </span>
-                            <span class='field_detail'>Praduman Goyal</span>
+                            <span class='field_detail'><?php echo $pinfo["name"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Class: </span>
-                                <span class='field_detail'>Praduman Goyal</span>
+                                <span class='field_detail'><?php echo $cinfo["course_name"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Deptt.: </span>
-                                <span class='field_detail'>App Maths</span>
+                                <span class='field_detail'><?php echo $cinfo["dept_name"] ?></span>
                             </div>
                         </div>
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>(Specialization in case of M. Tech./M.Sc): </span>
-                                <span class='field_detail'>Praduman Goyal</span>
+                                <span class='field_detail'><?php echo $cinfo["degree_name"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Branch: </span>
-                                <span class='field_detail'>App Maths</span>
+                                <span class='field_detail'><?php echo $cinfo["course_name"] ?></span>
                             </div>
                         </div>
                     </li>
@@ -69,11 +129,11 @@
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Bhawan: </span>
-                                <span class='field_detail'>RKB</span>
+                                <span class='field_detail'><?php echo $sinfo["bhawan_name"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Room No.: </span>
-                                <span class='field_detail'>756</span>
+                                <span class='field_detail'><?php echo $sinfo["room_number"] ?></span>
                             </div>
                         </div>
                     </li>
@@ -81,11 +141,11 @@
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Category(GEN/SC/ST/OBC): </span>
-                                <span class='field_detail'>GEN</span>
+                                <span class='field_detail'><?php echo $pinfo["category"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>DoB(DD/MM/YY): </span>
-                                <span class='field_detail'>17/06/1999</span>
+                                <span class='field_detail'><?php echo $pinfo["date_of_birth"] ?></span>
                             </div>
                         </div>
                     </li>
@@ -133,18 +193,17 @@
                     </li>
                     <li class='field_container'>
                         <div class='field-11'>
-                            <span c Nationality: ￼Indian ￼Foreign Country: Blood Group: O+ Marital Status: ￼Married
-                                ￼UnMarried ￼Male ￼Female Father's Name: Designation: Office Address: Ocupation: Phone
-                                Nos: Mother's Name: Parent's E-Mail: Phone Nos: Permanent Home Address: Address will go
-                                here Guardian(if any): Praduman Goyal Address: Phone No: ￼lass='field_heading'>Student's
+                            <span class='field_heading'>Student's
                                 Mobile No.: </span>
-                            <span class='field_detail'>Praduman Goyal</span>
+                            <span class='field_detail'><?php echo $pinfo["phone_number"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>
                         <div class='field-11'>
                             <span class='field_heading'>Student's E-Mail: </span>
-                            <span class='field_detail'>Praduman Goyal</span>
+                            <span class='field_detail'>
+                            	email@acc.in
+                            </span>
                         </div>
                     </li>
                     <li class='field_container'>
@@ -159,7 +218,7 @@
                                 </span> </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Blood Group: </span>
-                                <span class='field_detail'>O+</span>
+                                <span class='field_detail'><?php echo $pinfo["blood_group"] ?></span>
                             </div>
                         </div>
                     </li>
@@ -226,7 +285,7 @@
                             <span class='field_heading'>Permanent Home Address: </span>
                         </div>
                         <div class='field-11'>
-                            <span class='field_detail'>Address will go here</span>
+                            <span class='field_detail'><?php echo $pinfo["permanent_address"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>

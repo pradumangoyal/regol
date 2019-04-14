@@ -1,8 +1,14 @@
 <?php
+// Initialize the session
+session_start();
 
+if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
 $servername = "localhost";
-$username = "root";
-$password = "shubham";
+$username = "regol";
+$password = "regol";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);

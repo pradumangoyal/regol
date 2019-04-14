@@ -1,7 +1,10 @@
 <?php
+
+session_start();
+
 $servername = "localhost";
-$username = "root";
-$password = "shubham";
+$username = "regol";
+$password = "regol";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -15,8 +18,22 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating database: " . $conn->error;
 }
-$x = $_POST["PD"];
-echo $x;
+$pdetails = $_POST["pdeatils"];
+$sdetails = $_POST["sdeatils"];
+if($pdetails == "on")
+{
+	$sql="UPDATE VERIFIED SET PERSONAL_INFO='1' WHERE ENROLLMENT_NO=".$POST["Enno"].";";
+	$conn->query($sql);
+}
+if($sdetails == "on")
+{
+	$sql="UPDATE VERIFIED SET STUDENT_INFO='1' WHERE ENROLLMENT_NO=".$POST["Enno"].";";
+	$conn->query($sql);
+}
+if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
 ?>
 
 
@@ -28,6 +45,9 @@ echo $x;
 	
 </head>
 <body>
+<h1>
+	Your Response Has Been Recorded!
+</h1>
 <div id="verify">
 	<form method="POST" action="ensearch.php">
 		<input type="Submit" name="Search another Entry">
