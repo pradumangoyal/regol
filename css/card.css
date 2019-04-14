@@ -1,0 +1,169 @@
+@page {
+    size: 21cm 29.7cm;
+    margin: 30mm 45mm 30mm 45mm;
+     /* change the margins as you want them to be. */
+}
+
+body {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 0.4cm;
+    font-family: sans-serif;
+}
+
+.fill-box-container{
+    font-size: 0;
+}
+
+.fill-box {
+    font-size: 0.4cm;
+    display: inline-block;
+    padding: 0.05cm;
+    border: 0.03cm black solid;
+}
+
+.a4-page {
+    width: 29.7cm;
+    height: 21cm;
+    margin: 10px auto;
+    padding: 1cm;
+    padding-bottom: 0.5cm;
+    box-sizing: border-box;
+    border: 1px black solid;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    text-transform: uppercase;
+    display: flex;
+    width: 100%;
+}
+
+.title_heading_container{
+    width: 6cm;
+}
+
+.title_heading{
+    font-weight: bold;
+    border: black solid;
+    border-width: 0.05cm 0;
+    padding: 0.01cm;
+}
+
+.insti_branding{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.insti_logo {
+    display: inline-block;
+    width: 2cm;
+    height: 2cm;
+}
+
+.insti_branding_text{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 1cm;
+    font-weight: bold;
+}
+
+.insti_name{
+    font-size: 0.5cm;
+}
+
+.which_card{
+    margin-top: 0.2cm;
+    border: 0.05cm black solid;
+    padding: 0.02cm;
+    font-size: 0.6cm;
+}
+
+.form_block{
+    margin-top: 0.5cm;
+    width: 100%;
+    display: flex;
+}
+
+.fields_block{
+    width: 18.5cm;
+    font-weight: bold;
+}
+
+.field-full{
+    width: 100%;
+    display: flex;
+}
+
+.field-11 {
+    width: 12cm;
+    display: flex;
+    margin: 0.1cm 0;
+}
+
+.field-small{
+    width: auto !important;
+    flex-grow: 1 !important;
+    margin-left: 0.1cm;
+}
+
+.field_heading {
+    display: inline-block;
+    font-weight: normal;
+}
+
+.field_detail {
+    display: inline-block;
+    flex-grow: 1;
+    padding-left: 0.05cm;
+    margin-left: 0.2cm;
+    font-weight: normal;
+    border-bottom: 0.05cm black dotted;
+}
+
+.field_detail_checkbox {
+    border-bottom: none;
+}
+
+.field_detail_checkbox input {
+    background: red;
+}
+
+.photo_block {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.display_pic {
+    width: 4cm;
+    height: 5cm;
+}
+
+.declaration_block{
+    width: 100%;
+    font-weight: bold;
+}
+
+.sign_block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.sign-container{
+    height: 1.5cm;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 2cm;
+}
