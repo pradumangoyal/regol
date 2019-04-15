@@ -7,7 +7,7 @@
     
     $host = "localhost";
     $dbusername = "root";
-    $dbpassword = "Pissa@home";
+    $dbpassword = "";
     $dbname = "aniket";
     // Create connection
     

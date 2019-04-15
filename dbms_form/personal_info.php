@@ -15,7 +15,7 @@ if(empty($person_id) or empty($person_name) or empty($dob) or empty($address) or
 
 $host = "localhost";
 $dbusername = "root";
-$dbpassword = "Pissa@home";
+$dbpassword = "";
 $dbname = "aniket";
 // Create connection
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
