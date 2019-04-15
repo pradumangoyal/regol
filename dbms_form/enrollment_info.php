@@ -7,14 +7,18 @@
     
     $host = "localhost";
     $dbusername = "root";
-    $dbpassword = "";
+    $dbpassword = "Pissa@home";
     $dbname = "aniket";
     // Create connection
     
-    mysql_connect($host, $dbusername, $dbpassword);
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    if (!$link) {
+        die('Could not connect: ' . mysql_error());
+    }
+    echo 'Connected successfully';
     mysql_select_db($dbname);
 
-    $sql = "SELECT enrollment_no from secret_keys WHERE secret_key='$secret_key'";
+    $sql = "SELECT enrollment_no from secret_keys WHERE secret_key='$secret_key';";
     $result = mysql_query($sql) or die(mysql_error());
 
     echo "Enrollment Number: ".$result;

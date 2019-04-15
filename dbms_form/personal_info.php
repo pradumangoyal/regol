@@ -15,7 +15,7 @@ if(empty($person_id) or empty($person_name) or empty($dob) or empty($address) or
 
 $host = "localhost";
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "Pissa@home";
 $dbname = "aniket";
 // Create connection
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
@@ -27,7 +27,7 @@ if (mysqli_connect_error()){
 else{
     $sql = "UPDATE personal_info
     SET name = '$person_name', date_of_birth = '$dob', phone_number = '$telephone', permanent_address = '$address', category = '$category', blood_group = '$blood'
-    WHERE person_id = '$person_id'";
+    WHERE person_id = '$person_id';";
     if ($conn->query($sql)){
     echo "New record is inserted sucessfully";
     }
