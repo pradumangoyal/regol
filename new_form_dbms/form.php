@@ -86,6 +86,30 @@
 
 		<br> <br> <br>
 
+		<h2> Father's Information </h2>
+		<br>
+		Parent ID: <input type="text" name="father_id" value= <?php echo $_SESSION["father_id"] ?> readonly>
+		Name: <input type="text" name="father_name">
+		Date Of Birth: <input type="text" name="father_dob">
+		Gender: <input type="text" name="father_gender" value="Male" readonly>
+		Phone Number: <input type="text" name="father_phone">
+		Email address: <input type="text" name="father_email">
+		Blood Group: <input type="text" name="father_blood">
+
+		<br> <br> <br>
+
+		<h2> Mother's Information </h2>
+		<br>
+		Parent ID: <input type="text" name="mother_id" value= <?php echo $_SESSION["mother_id"] ?> readonly>
+		Name: <input type="text" name="mother_name">
+		Date Of Birth: <input type="text" name="mother_dob">
+		Gender: <input type="text" name="mother_gender" value="Female" readonly>
+		Phone Number: <input type="text" name="mother_phone">
+		Email address: <input type="text" name="mother_email">
+		Blood Group: <input type="text" name="mother_blood">
+
+		<br> <br> <br>
+
 		<h2> Course Information </h2>
 		<br>
 		Course ID: <input type="text" name="course_id" value= <?php echo $_SESSION["course_id"] ?> readonly>
@@ -111,6 +135,14 @@
 		<input type="submit" name="Submit">
 
 	</form>
+	
+	<div id="logout">
+		<form action="logout_key.php" method="POST">
+
+			<input type="submit" name="Submit">
+			
+		</form>
+	</div>
 
 </div>
 </body>

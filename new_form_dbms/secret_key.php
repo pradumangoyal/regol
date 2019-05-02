@@ -19,6 +19,7 @@
 <div id="enter_key">
 	<form action="submit_key.php" method="POST">
 		Secret Key: <input type="text" name="secret_key">
+		Enrollment Number: <input type="text" name="enrollment_no">
 		<input type="submit" name="Submit">
 	</form>
 </div>

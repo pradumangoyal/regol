@@ -27,6 +27,7 @@ CREATE TABLE users (
 -- Table `regol`.`person`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `regol`.`person` (
+  `enrollment_no` INT NOT NULL
   `person_id` INT NOT NULL
   `secret_key` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`person_id`))

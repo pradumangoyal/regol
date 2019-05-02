@@ -6,6 +6,7 @@
 	session_start();
 
 	$secret_key = filter_input(INPUT_POST, 'secret_key');
+	$_SESSION["enrollment_no"] = filter_input(INPUT_POST, 'enrollment_no');
 
 	$host = "localhost";
 	$dbusername = "regol";
@@ -18,17 +19,17 @@
 	}
 	// mysql_select_db($dbname);
 
-	$sql1 = "SELECT enrollment_no from secret_keys WHERE secret_key='$secret_key'";
-	$enrollment = mysqli_query($link, $sql1);
-	while ($row = $enrollment->fetch_assoc()) {
-    	$_SESSION["enrollment_no"] = $row['enrollment_no'];
-	}
-
-	$sql2 = "SELECT person_id from person where secret_key='$secret_key'";
+	$sql2 = "SELECT person_id from person where secret_key='$secret_key' and enrollment_no='$_SESSION[enrollment_no]'";
 	$person_id = mysqli_query($link, $sql2);
 	while ($row = $person_id->fetch_assoc()) {
     	$_SESSION["person_id"] = $row['person_id'];
 	}
+
+	$sql3 = "SELECT parent_person_id from parent_child where child_person_id='$_SESSION[person_id]'";
+	$parent_id = mysqli_query($link, $sql3);
+	$row = $parent_id->fetch_assoc())
+    $_SESSION["father_id"] = $row[0];
+    $_SESSION["mother_id"] = $row[1];
 
 ?>
 
