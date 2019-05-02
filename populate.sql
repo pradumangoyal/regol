@@ -22,8 +22,8 @@ INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (5, 'Pawan Kapoor')
 INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (6, 'Anita Kapoor');
 INSERT INTO `regol`.`secret_keys` VALUES (17314, 'xFsfe882');
 INSERT INTO `regol`.`secret_keys` VALUES (17130, 'tBsqr134');
-INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17314);
-INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17130);
+INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17312014);
+INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17313030);
 INSERT INTO `regol`.`parent_child` VALUES (2, 1);
 INSERT INTO `regol`.`parent_child` VALUES (3, 1);
 INSERT INTO `regol`.`parent_child` VALUES (5, 4);
