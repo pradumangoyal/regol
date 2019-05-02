@@ -15,7 +15,7 @@ USE `regol` ;
 -- -------------------------------------------------------
 -- Users table, containing admin users who verify the student profiles
 -- -------------------------------------------------------
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -27,9 +27,7 @@ CREATE TABLE users (
 -- Table `regol`.`person`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `regol`.`person` (
-  `enrollment_no` INT NOT NULL
-  `person_id` INT NOT NULL
-  `secret_key` VARCHAR(8) NOT NULL,
+  `person_id` INT NOT NULL,
   PRIMARY KEY (`person_id`))
 ENGINE = InnoDB;
  
@@ -162,23 +160,50 @@ CREATE TABLE IF NOT EXISTS `regol`.`verified` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
- 
- 
+
 -- -----------------------------------------------------
 -- Table `regol`.`secret_keys`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `regol`.`secret_keys` (
   `enrollment_no` INT NOT NULL,
-  `secret_key` VARCHAR(8) NOT NULL,
+  `secret_key` VARCHAR(8) NULL,
   PRIMARY KEY (`enrollment_no`),
   CONSTRAINT `secret_keys_enrollment_no`
     FOREIGN KEY (`enrollment_no`)
-    REFERENCES `regol`.`student` (`person_id`)
+    REFERENCES `regol`.`student` (`enrollment_no`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
- 
- 
+
+INSERT INTO `regol`.`department` VALUES ('Mathematics', 'Department of Mathematics, IIT Roorkee', '9887331321');
+INSERT INTO `regol`.`department` VALUES ('Computer Science', 'Electronics and Computer Department, IIT Roorkee', '9143234566');
+INSERT INTO `regol`.`course` VALUES (1, 'Mathematics', 'Integrated MSc', 'Applied Mathematics', 5);
+INSERT INTO `regol`.`course` VALUES (2, 'Computer Science', 'Bachelor of Technology', 'Computer Science and Engineering', 4);
+INSERT INTO `regol`.`batch` VALUES (1, 14, 2022);
+INSERT INTO `regol`.`batch` VALUES (2, 38, 2021);
+INSERT INTO `regol`.`person` VALUES (1);       
+INSERT INTO `regol`.`person` VALUES (2);       
+INSERT INTO `regol`.`person` VALUES (3);       
+INSERT INTO `regol`.`person` VALUES (4);       
+INSERT INTO `regol`.`person` VALUES (5);       
+INSERT INTO `regol`.`person` VALUES (6);       
+INSERT INTO `regol`.`student` (person_id, enrollment_no) VALUES (1, 17314);
+INSERT INTO `regol`.`student` (person_id, enrollment_no) VALUES (4, 17130);      
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (1, 'Varun Sharma');
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (2, 'Hans Raj Sharma');
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (3, 'Jyoti Sharma');
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (4, 'Rohan Kapoor');
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (5, 'Pawan Kapoor');
+INSERT INTO `regol`.`personal_info` (person_id, name) VALUES (6, 'Anita Kapoor');
+INSERT INTO `regol`.`secret_keys` VALUES (17314, 'xFsfe882');
+INSERT INTO `regol`.`secret_keys` VALUES (17130, 'tBsqr134');
+INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17314);
+INSERT INTO `regol`.`verified` (enrollment_no) VALUES (17130);
+INSERT INTO `regol`.`parent_child` VALUES (2, 1);
+INSERT INTO `regol`.`parent_child` VALUES (3, 1);
+INSERT INTO `regol`.`parent_child` VALUES (5, 4);
+INSERT INTO `regol`.`parent_child` VALUES (6, 4);
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
