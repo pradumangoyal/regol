@@ -8,6 +8,9 @@
 	$secret_key = filter_input(INPUT_POST, 'secret_key');
 	$_SESSION["enrollment_no"] = filter_input(INPUT_POST, 'enrollment_no');
 
+    $temp = array(1, 2);     // It is just as a temporary variable
+    $tmp = 0;    // It is just as a temporary variable
+
 	$host = "localhost";
 	$dbusername = "regol";
 	$dbpassword = "regol";
@@ -19,6 +22,12 @@
 	}
 	// mysql_select_db($dbname);
 
+    $sql1 = "SELECT course_id from student WHERE enrollment_no='$_SESSION[enrollment_no]'";
+    $course_id = mysqli_query($link, $sql1);
+    while ($row = $course_id->fetch_assoc()) {
+        $_SESSION["course_id"] = $row['course_id'];
+    }
+
 	$sql2 = "SELECT person_id from student where enrollment_no='$_SESSION[enrollment_no]'";
 	$person_id = mysqli_query($link, $sql2);
 	while ($row = $person_id->fetch_assoc()) {
@@ -27,9 +36,13 @@
 
 	$sql3 = "SELECT parent_person_id from parent_child where child_person_id='$_SESSION[person_id]'";
 	$parent_id = mysqli_query($link, $sql3);
-	$row = $parent_id->fetch_assoc())
-    $_SESSION["father_id"] = $row[0];
-    $_SESSION["mother_id"] = $row[1];
+	$row = $parent_id->fetch_assoc();
+    while ($row = $person_id->fetch_assoc()) {
+        $temp[$tmp] = $row['parent_person_id'];
+        $tmp = $tmp + 1;
+    }
+    $_SESSION["father_id"] = $temp[0];
+    $_SESSION["mother_id"] = $temp[1];
 
 ?>
 

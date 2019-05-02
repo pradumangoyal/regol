@@ -4,10 +4,14 @@
 
 	session_start();
 
+	// echo $_SESSION["course_id"];
+
 	$host = "localhost";
 	$dbusername = "regol";
 	$dbpassword = "regol";
 	$dbname = "regol";
+
+	$dept_name = "";
 
 	$link = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
 	if (!$link) {
@@ -15,13 +19,13 @@
 	}
 	// mysql_select_db($dbname);
 
-	$sql1 = "SELECT course_id from student WHERE enrollment_no='$_SESSION[enrollment_no]'";
-	$course_id = mysqli_query($link, $sql1);
-	while ($row = $course_id->fetch_assoc()) {
-    	$_SESSION["course_id"] = $row['course_id'];
-	}
+	// $sql1 = "SELECT course_id from student WHERE enrollment_no='$_SESSION[enrollment_no]'";
+	// $course_id = mysqli_query($link, $sql1);
+	// while ($row = $course_id->fetch_assoc()) {
+ //    	$_SESSION["course_id"] = $row['course_id'];
+	// }
 
-	$sql2 = "SELECT batch_id from student where enrollment_no='$_SESSION[enrollment_no]'";
+	$sql2 = "SELECT batch_id from batch where course_id='$_SESSION[course_id]'";
 	$batch = mysqli_query($link, $sql2);
 	while ($row = $batch->fetch_assoc()) {
     	$batch_id = $row['batch_id'];
@@ -39,22 +43,46 @@
     	$room_number = $row['room_number'];
 	}
 
-	$sql5 = "SELECT  bank_name from student where enrollment_no='$_SESSION[enrollment_no]'";
-	$bank = mysqli_query($link, $sql5);
-	while ($row = $bank->fetch_assoc()) {
-    	$bank_name = $row['bank_name'];
-	}
+	// $sql5 = "SELECT  bank_name from student where enrollment_no='$_SESSION[enrollment_no]'";
+	// $bank = mysqli_query($link, $sql5);
+	// while ($row = $bank->fetch_assoc()) {
+ //    	$bank_name = $row['bank_name'];
+	// }
 
-	$sql6 = "SELECT  account_number from student where enrollment_no='$_SESSION[enrollment_no]'";
-	$account = mysqli_query($link, $sql6);
-	while ($row = $account->fetch_assoc()) {
-    	$account_number = $row['account_number'];
+	// $sql6 = "SELECT  account_number from student where enrollment_no='$_SESSION[enrollment_no]'";
+	// $account = mysqli_query($link, $sql6);
+	// while ($row = $account->fetch_assoc()) {
+ //    	$account_number = $row['account_number'];
 	}
 
 	$sql7 = "SELECT  physical_disability from student where enrollment_no='$_SESSION[enrollment_no]'";
 	$physical_disab = mysqli_query($link, $sql7);
 	while ($row = $physical_disab->fetch_assoc()) {
     	$physical_disability = $row['physical_disability'];
+	}
+
+	$sql8 = "SELECT  dept_name from course where course_id='$_SESSION[course_id]'";
+	$dept = mysqli_query($link, $sql8);
+	while ($row = $dept->fetch_assoc()) {
+    	$dept_name = $row['dept_name'];
+	}
+
+	$sql9 = "SELECT  degree_name from course where course_id='$_SESSION[course_id]'";
+	$degree = mysqli_query($link, $sql9);
+	while ($row = $degree->fetch_assoc()) {
+    	$degree_name = $row['degree_name'];
+	}
+
+	$sql10 = "SELECT  course_name from course where course_id='$_SESSION[course_id]'";
+	$course = mysqli_query($link, $sql10);
+	while ($row = $course->fetch_assoc()) {
+    	$course_name = $row['course_name'];
+	}
+
+	$sql11 = "SELECT  years from course where course_id='$_SESSION[course_id]'";
+	$year = mysqli_query($link, $sql11);
+	while ($row = $year->fetch_assoc()) {
+    	$years = $row['years'];
 	}
 
 ?>
@@ -331,7 +359,7 @@
 		<div class="ui label">
 		Department Name: 
 		</div>
-		<input type="text" name="dept_name">
+		<input type="text" name="dept_name" value= <?php echo $dept_name ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -339,7 +367,7 @@
 		<div class="ui label">
 		Degree Name: 
 		</div>
-		<input type="text" name="degree_name">
+		<input type="text" name="degree_name" value= <?php echo $degree_name ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -347,7 +375,7 @@
 		<div class="ui label">
 		Course Name: 
 		</div>
-		<input type="text" name="course_name">
+		<input type="text" name="course_name" value= <?php echo $course_name ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -355,7 +383,7 @@
 		<div class="ui label">
 		Years: 
 		</div>
-		<input type="text" name="years">
+		<input type="text" name="years" value= <?php echo $years ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -391,7 +419,7 @@
 		<div class="ui label">
 		Bank Name: 
 		</div>
-		<input type="text" name="bank_name" value= <?php echo $bank_name ?> readonly>
+		<input type="text" name="bank_name">
 		</div>
 		<br/><br/>
 
@@ -399,7 +427,7 @@
 		<div class="ui label">
 		Account Number: 
 		</div>
-		<input type="text" name="account_number" value= <?php echo $account_number ?> readonly>
+		<input type="text" name="account_number">
 		</div>
 		<br/><br/>
 

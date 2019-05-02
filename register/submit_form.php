@@ -25,11 +25,13 @@
 	$mother_email = filter_input(INPUT_POST, 'mother_email');
 	$mother_blood = filter_input(INPUT_POST, 'mother_blood');
 
-	$dept_name = filter_input(INPUT_POST, 'dept_name');
-	$degree_name = filter_input(INPUT_POST, 'degree_name');
-	$course_name = filter_input(INPUT_POST, 'course_name');
-	$years = filter_input(INPUT_POST, 'years');
+	// $dept_name = filter_input(INPUT_POST, 'dept_name');
+	// $degree_name = filter_input(INPUT_POST, 'degree_name');
+	// $course_name = filter_input(INPUT_POST, 'course_name');
+	// $years = filter_input(INPUT_POST, 'years');
 
+	$bank_name = filter_input(INPUT_POST, 'bank_name');
+	$account_number = filter_input(INPUT_POST, 'account_number');
 
 	$host = "localhost";
 	$dbusername = "regol";
@@ -53,10 +55,13 @@
 	    SET name = '$name', date_of_birth = '$dob', gender = 'female', phone_number = '$phone', email_address = '$email', blood_group = '$blood'
 	    	WHERE person_id = '$_SESSION[mother_id]';";	
 
+	    $sql4 = "UPDATE student
+	    SET bank_name='$bank_name', account_number='$account_number'
+	    	WHERE person_id = '$_SESSION[person_id]';";	
 
-	    $sql4 = "UPDATE course
-	    SET dept_name = '$dept_name', degree_name = '$degree_name', course_name = '$course_name', years = '$years'
-	    	WHERE course_id = '$_SESSION[course_id]';";
+	    // $sql4 = "UPDATE course
+	    // SET dept_name = '$dept_name', degree_name = '$degree_name', course_name = '$course_name', years = '$years'
+	    // 	WHERE course_id = '$_SESSION[course_id]';";
 
 	    mysqli_query($link, $sql1);
 	    mysqli_query($link, $sql2);
