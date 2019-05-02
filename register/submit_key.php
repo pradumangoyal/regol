@@ -36,12 +36,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Verification Page</title>
-	<!-- <link rel="stylesheet" type="text/css" href="verify.css"> -->
+	<title>Verification Page</title>    
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .middle {
+            flex-grow: 1;
+        }
+        .header-container {
+            display: flex;
+            width: 100%;
+        }
+        .gutter-space {
+            flex-grow: 1;
+        }
+    </style>
 	
 </head>
 <body>
-<div id="info">
+<div class="ui attached segment header-container">
+        <div>
+            <h2 class="ui header">
+                <i class="edit icon"></i>
+                <div class="content">
+                <a href='/regol/admin.php'>
+                    Regol
+                </a>
+                </div>
+            </h2>  
+        </div>
+        <div class='gutter-space'></div>
+        <div>
+            <button class='ui button basic' onclick="location.href='logout.php'">
+                <i class='icon sign-out'></i>
+                Sign out
+            </button>
+        </div>
+    </div>
+<div id="info" class="ui container middle">
+<div class="ui segment basic">
 	<h2>Please note both of them for further application filling</h2>
 	<h4> Enrollment Number: <?php echo (string)$_SESSION["enrollment_no"]; ?></h4>
 	<h4> Person ID: <?php echo (string)$_SESSION["person_id"]; ?></h4>
@@ -50,5 +92,9 @@
 		<button>Next</button>
 	</form>
 </div>
+</div>
+<div class="ui attached segment header-container">
+    Regol &copy; 2019
+    </div>
 </body>
 </html>
