@@ -12,17 +12,23 @@
 	$dbpassword = "regol";
 	$dbname = "regol";
 
-	$link = mysql_connect($host, $dbusername, $dbpassword);
+	$link = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
 	if (!$link) {
 	    die('Could not connect: ' . mysql_error());
 	}
-	mysql_select_db($dbname);
+	// mysql_select_db($dbname);
 
 	$sql1 = "SELECT enrollment_no from secret_keys WHERE secret_key='$secret_key'";
-	$_SESSION["enrollment_no"] = mysql_query($sql1) or die(mysql_error());
+	$enrollment = mysqli_query($link, $sql1);
+	while ($row = $enrollment->fetch_assoc()) {
+    	$_SESSION["enrollment_no"] = $row['enrollment_no'];
+	}
 
-	$sql2 = "SELECT person_id from person where enrollment_no='$enrollment_no'";
-	$_SESSION["person_id"] = mysql_query($sql2) or die(mysql_error());
+	$sql2 = "SELECT person_id from person where secret_key='$secret_key'";
+	$person_id = mysqli_query($link, $sql2);
+	while ($row = $person_id->fetch_assoc()) {
+    	$_SESSION["person_id"] = $row['person_id'];
+	}
 
 ?>
 
@@ -36,8 +42,8 @@
 <body>
 <div id="info">
 	<h2>Please note both of them for further application filling</h2>
-	<h4> Enrollment Number: <?php echo $_SESSION["enrollment_no"]; ?></h4>
-	<h4> Person ID: <?php echo $_SESSION["person_id"]; ?></h4>
+	<h4> Enrollment Number: <?php echo (string)$_SESSION["enrollment_no"]; ?></h4>
+	<h4> Person ID: <?php echo (string)$_SESSION["person_id"]; ?></h4>
 
 	<form method="POST" action="form.php">
 		<button>Next</button>

@@ -6,7 +6,9 @@
 
 	$name = filter_input(INPUT_POST, 'name');
 	$dob = filter_input(INPUT_POST, 'dob');
+	$gender = filter_input(INPUT_POST, 'gender');
 	$phone = filter_input(INPUT_POST, 'phone');
+	$email = filter_input(INPUT_POST, 'email');
 	$address = filter_input(INPUT_POST, 'address');
 	$category = filter_input(INPUT_POST, 'category');
 	$blood = filter_input(INPUT_POST, 'blood');
@@ -21,24 +23,22 @@
 	$dbpassword = "regol";
 	$dbname = "regol";
 
-	$conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-
-	if (mysqli_connect_error()){
-	    die('Connect Error ('. mysqli_connect_errno() .') '
-	    . mysqli_connect_error());
+	$link = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
+	if (!$link) {
+	    die('Could not connect: ' . mysql_error());
 	}
 	else{
 	    $sql1 = "UPDATE personal_info
-	    SET name = '$name', date_of_birth = '$dob', phone_number = '$phone', permanent_address = '$address', category = '$category', blood_group = '$blood'
-	    	WHERE person_id = '$_SESSION["person_id"]';";
+	    SET name = '$name', date_of_birth = '$dob', gender = '$gender', phone_number = '$phone', email_address = '$email', permanent_address = '$address', category = '$category', blood_group = '$blood'
+	    	WHERE person_id = '$_SESSION[person_id]';";
 
 
 	    $sql2 = "UPDATE course
 	    SET dept_name = '$dept_name', degree_name = '$degree_name', course_name = '$course_name', years = '$years'
-	    	WHERE course_id = '$_SESSION["course_id"]';";
+	    	WHERE course_id = '$_SESSION[course_id]';";
 
-	    $conn->query($sql1)
-	    $conn->query($sql2)
+	    mysqli_query($link, $sql1);
+	    mysqli_query($link, $sql2);
 	}
 
 
