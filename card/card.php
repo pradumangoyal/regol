@@ -32,6 +32,7 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating database: " . $conn->error;
 }
+
 $sql = "SELECT * FROM student where enrollment_no=". $_POST["enrollment"]. ";";
 $result = $conn->query($sql);
 if ($result->num_rows > 0){ 
@@ -59,7 +60,27 @@ if ($result1->num_rows > 0) {
 	}
 }
 
+$sql = "SELECT * FROM parent_child where child_person_id=". $person_id . ";";
+$result = $conn->query($sql);
+$row=mysqli_fetch_all($result);
+$father_id=$row[0][0];
+$mother_id=$row[1][0];
 
+$sql = "SELECT * FROM personal_info where person_id=". $father_id.";";
+$result1 = $conn->query($sql);
+if ($result1->num_rows > 0) { 
+	while($row1 = $result1->fetch_assoc()) {
+		$finfo = $row1;
+	}
+}
+
+$sql = "SELECT * FROM personal_info where person_id=". $mother_id.";";
+$result1 = $conn->query($sql);
+if ($result1->num_rows > 0) { 
+	while($row1 = $result1->fetch_assoc()) {
+		$minfo = $row1;
+	}
+}
 
 ?>
 
@@ -179,22 +200,22 @@ if ($result1->num_rows > 0) {
                         <div class='field-11'>
                             <span class='field_heading'>Bank Account No.: </span>
                             <span class='field_detail field_detail_checkbox fill-box-container'>
+                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>4</span>
                                 <span class='fill-box'>3</span>
-                                <span class='fill-box'>1</span>
-                                <span class='fill-box'>2</span>
+                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>5</span>
+                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>0</span>
                                 <span class='fill-box'>0</span>
                                 <span class='fill-box'>2</span>
+                                <span class='fill-box'>6</span>
+                                <span class='fill-box'>7</span>
+                                <span class='fill-box'>6</span>
                                 <span class='fill-box'>0</span>
-                                <span class='fill-box'>3</span>
-                                <span class='fill-box'>1</span>
-                                <span class='fill-box'>2</span>
-                                <span class='fill-box'>0</span>
-                                <span class='fill-box'>2</span>
-                                <span class='fill-box'>0</span>
-                                <span class='fill-box'>2</span>
-                                <span class='fill-box'>0</span>
-                                <span class='fill-box'>2</span>
-                                <span class='fill-box'>0</span>
+                                <span class='fill-box'>8</span>
                             </span>
                         </div>
                     </li>
@@ -209,7 +230,7 @@ if ($result1->num_rows > 0) {
                         <div class='field-11'>
                             <span class='field_heading'>Student's E-Mail: </span>
                             <span class='field_detail'>
-                            	email@acc.in
+                            	email-personal@cc.in
                             </span>
                         </div>
                     </li>
@@ -249,7 +270,7 @@ if ($result1->num_rows > 0) {
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Father's Name: </span>
-                                <span class='field_detail'></span>
+                                <span class='field_detail'><?php echo $finfo["name"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Designation: </span>
@@ -259,7 +280,7 @@ if ($result1->num_rows > 0) {
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Office Address: </span>
-                                <span class='field_detail'></span>
+                                <span class='field_detail'><?php echo $finfo["permanent_address"] ?></span>
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>Ocupation: </span>
@@ -268,23 +289,23 @@ if ($result1->num_rows > 0) {
                         </div>
                         <div class='field-full'>
                             <span class='field_heading'>Phone Nos: </span>
-                            <span class='field_detail'></span>
+                            <span class='field_detail'><?php echo $finfo["phone_number"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>
                         <div class='field-full'>
                             <div class='field-11'>
                                 <span class='field_heading'>Mother's Name: </span>
-                                <span class='field_detail'></span>
+                                <span class='field_detail'><?php echo $minfo["name"] ?></span>
                             </div>
                             <div class="field-11 field-small">
-                                <span class='field_heading'>Parent's E-Mail: </span>
-                                <span class='field_detail'></span>
+                                <span class='field_heading'>E-Mail: </span>
+                                <span class='field_detail'>mother@ccmail.in</span>
                             </div>
                         </div>
                         <div class='field-full'>
                             <span class='field_heading'>Phone Nos: </span>
-                            <span class='field_detail'></span>
+                            <span class='field_detail'><?php echo $minfo["phone_number"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>
@@ -292,13 +313,13 @@ if ($result1->num_rows > 0) {
                             <span class='field_heading'>Permanent Home Address: </span>
                         </div>
                         <div class='field-11'>
-                            <span class='field_detail'><?php echo $pinfo["permanent_address"] ?></span>
+                            <span class='field_detail'><?php echo $minfo["permanent_address"] ?></span>
                         </div>
                     </li>
                     <li class='field_container'>
                         <div class='field-11'>
                             <span class='field_heading'>Guardian(if any): </span>
-                            <span class='field_detail'>Praduman Goyal</span>
+                            <span class='field_detail'></span>
                         </div>
                         <div class='field-full'>
                             <div class='field-11'>
