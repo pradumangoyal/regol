@@ -40,7 +40,7 @@
             <h2 class="ui header">
                 <i class="edit icon"></i>
                 <div class="content">
-                <a href='/regol/admin.php'>
+                <a href='/regol/'>
                     Regol
                 </a>
                 </div>
