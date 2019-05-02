@@ -47,12 +47,6 @@
             </h2>  
         </div>
         <div class='gutter-space'></div>
-        <div>
-            <button class='ui button basic' onclick="location.href='/regol/register/logout_key.php'">
-                <i class='icon sign-out'></i>
-                Sign out
-            </button>
-        </div>
     </div>
 	<div class="ui container middle">
 	<div class="ui segment basic">
