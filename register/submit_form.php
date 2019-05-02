@@ -33,41 +33,61 @@
 	$bank_name = filter_input(INPUT_POST, 'bank_name');
 	$account_number = filter_input(INPUT_POST, 'account_number');
 
-	$host = "localhost";
-	$dbusername = "regol";
-	$dbpassword = "regol";
+	$servername = "localhost";
+	$username = "regol";
+	$password = "regol";
 	$dbname = "regol";
-
-	$link = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
-	if (!$link) {
-	    die('Could not connect: ' . mysql_error());
+	
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	} $sql = "USE regol";
+	if ($conn->query($sql) === TRUE) {
+		echo "";
+	} else {
+		echo "Error creating database: " . $conn->error;
 	}
-	else{
-	    $sql1 = "UPDATE personal_info
-	    SET date_of_birth = '$dob', gender = '$gender', phone_number = '$phone', email_address = '$email', permanent_address = '$address', category = '$category', blood_group = '$blood'
-	    	WHERE person_id = '$_SESSION[person_id]';";
-
-	    $sql2 = "UPDATE personal_info
-	    SET date_of_birth = '$father_dob', gender = 'male', phone_number = '$father_phone', email_address = '$father_email', blood_group = '$father_blood'
-	    	WHERE person_id = '$_SESSION[father_id]';";
-
-	    $sql3 = "UPDATE personal_info
-	    SET date_of_birth = '$mother_dob', gender = 'female', phone_number = '$mother_phone', email_address = '$mother_email', blood_group = '$mother_blood'
-	    	WHERE person_id = '$_SESSION[mother_id]';";	
-
-	    $sql4 = "UPDATE student
-	    SET bank_name='$bank_name', account_number='$account_number'
-	    	WHERE person_id = '$_SESSION[person_id]';";	
-
-	    // $sql4 = "UPDATE course
-	    // SET dept_name = '$dept_name', degree_name = '$degree_name', course_name = '$course_name', years = '$years'
-	    // 	WHERE course_id = '$_SESSION[course_id]';";
-
-	    mysqli_query($link, $sql1);
-	    mysqli_query($link, $sql2);
-	    mysqli_query($link, $sql3);
-	    mysqli_query($link, $sql4);
+	
+	$sql = "SELECT * FROM student where enrollment_no=". $_SESSION["enrollment_no"]. ";";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0){ 
+		while($row = $result->fetch_assoc()) {
+			$sinfo = $row;
+		}
 	}
+
+	$person_id = $sinfo['person_id'];
+
+	$sql = "SELECT * FROM parent_child where child_person_id=". $person_id . ";";
+	$result = $conn->query($sql);
+	$row=mysqli_fetch_all($result);
+	$fid=$row[0][0];
+	$mid=$row[1][0];
+
+	$sql1 = "UPDATE personal_info
+	SET date_of_birth = '$dob', gender = '$gender', phone_number = '$phone', email_address = '$email', permanent_address = '$address', category = '$category', blood_group = '$blood'
+		WHERE person_id = '$person_id';";
+
+	$sql2 = "UPDATE personal_info
+	SET date_of_birth = '$father_dob', gender = 'male', phone_number = '$father_phone', email_address = '$father_email', blood_group = '$father_blood'
+		WHERE person_id = '$fid';";
+
+	$sql3 = "UPDATE personal_info
+	SET date_of_birth = '$mother_dob', gender = 'female', phone_number = '$mother_phone', email_address = '$mother_email', blood_group = '$mother_blood'
+		WHERE person_id = '$mid';";	
+
+	$sql4 = "UPDATE student
+	SET bank_name='$bank_name', account_number='$account_number'
+		WHERE person_id = '$_SESSION[enrollment_no]';";	
+	
+	$result = $conn->query($sql1);
+	$result = $conn->query($sql2);
+	$result = $conn->query($sql3);
+	$result = $conn->query($sql4);
+
 
 ?>
 

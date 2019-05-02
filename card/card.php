@@ -172,7 +172,7 @@ if ($result1->num_rows > 0) {
                                 <span class='field_detail'><?php echo $pinfo["category"] ?></span>
                             </div>
                             <div class="field-11 field-small">
-                                <span class='field_heading'>DoB(DD/MM/YY): </span>
+                                <span class='field_heading'>DoB(YYYY-MM-DD): </span>
                                 <span class='field_detail'><?php echo $pinfo["date_of_birth"] ?></span>
                             </div>
                         </div>

@@ -85,7 +85,7 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 	</tr>
 	</tbody>
 	</table>
-	<button onclick="location.href = '/regol/ensearch.php'">
+	<button onclick="location.href = '/regol/ensearch.php'" class='ui button'>
 	Verify more
 	</button>
 </div>
