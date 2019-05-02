@@ -33,6 +33,42 @@
 	$bhawan_name = $sinfo['bhawan_name'];
 	$room_number = $sinfo['room_number'];
 	$course_id = $sinfo['course_id'];
+	$person_id = $sinfo['person_id'];
+
+	$sql = "SELECT * FROM personal_info where person_id=". $person_id . ";";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0){ 
+		while($row = $result->fetch_assoc()) {
+			$pinfo = $row;
+		}
+	}
+
+	$name = $pinfo['name'];
+
+	$sql = "SELECT * FROM parent_child where child_person_id=". $person_id . ";";
+	$result = $conn->query($sql);
+	$row=mysqli_fetch_all($result);
+	$father_id=$row[0][0];
+	$mother_id=$row[1][0];
+
+	$sql = "SELECT * FROM personal_info where person_id=". $father_id.";";
+	$result1 = $conn->query($sql);
+	if ($result1->num_rows > 0) { 
+		while($row1 = $result1->fetch_assoc()) {
+			$finfo = $row1;
+		}
+	}
+
+	$sql = "SELECT * FROM personal_info where person_id=". $mother_id.";";
+	$result1 = $conn->query($sql);
+	if ($result1->num_rows > 0) { 
+		while($row1 = $result1->fetch_assoc()) {
+			$minfo = $row1;
+		}
+	}
+
+	$fname = $finfo['name'];
+	$mname = $minfo['name'];
 
 	$sql = "SELECT * FROM course where course_id=".$course_id. ";";
 	$result = $conn->query($sql);
@@ -108,20 +144,12 @@
 
 		<h2> Personal Information </h2>
 		<br>
-		<div class="ui labeled input">
-                <div class="ui label">
-				Person ID: 
-				</div>
-				<input type="text" name="person_id" value= <?php echo $_SESSION["person_id"] ?> readonly>
-		</div>
-		<br/>
-		<br/>
 
 		<div class="ui labeled input">
                 <div class="ui label">
 				Name: 
 		</div>
-		<input type="text" name="name">
+		<input type="text" name="name" value= <?php echo $name ?> readonly>
 		</div>
 		<br/>
 		<br/>
@@ -183,19 +211,12 @@
 
 		<h2> Father's Information </h2>
 		<br>
-		<div class="ui labeled input">
-		<div class="ui label">
-		Parent ID: 
-		</div>
-		<input type="text" name="father_id" value= <?php echo $_SESSION["father_id"] ?> readonly>
-		</div>
-		<br/><br/>
 
 		<div class="ui labeled input">
 		<div class="ui label">
 		Name: 
 		</div>
-		<input type="text" name="father_name">
+		<input type="text" name="father_name" value= <?php echo $fname ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -243,19 +264,12 @@
 		
 		<h2> Mother's Information </h2>
 		<br>
-		<div class="ui labeled input">
-		<div class="ui label">
-		Parent ID: 
-		</div>
-		<input type="text" name="mother_id" value= <?php echo $_SESSION["mother_id"] ?> readonly>
-		</div>
-		<br/><br/>
 
 		<div class="ui labeled input">
 		<div class="ui label">
 		Name: 
 		</div>
-		<input type="text" name="mother_name">
+		<input type="text" name="mother_name" value= <?php echo $mname ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -303,21 +317,6 @@
 		
 		<h2> Course Information </h2>
 		<br>
-		<div class="ui labeled input">
-		<div class="ui label">
-		Course ID: 
-		</div>
-		<input type="text" name="course_id" value= <?php echo $course_id ?> readonly>
-		</div>
-		<br/><br/>
-
-		<div class="ui labeled input">
-		<div class="ui label">
-		Batch ID: 
-		</div>
-		<input type="text" name="batch_id" value= <?php echo $batch_id ?> readonly>
-		</div>
-		<br/><br/>
 
 		<div class="ui labeled input">
 		<div class="ui label">
@@ -355,15 +354,6 @@
 		
 		<h3> Miscellaneous Information </h2>
 		<br>
-		<div class="ui labeled input">
-		<div class="ui label">
-		Batch ID: 
-		</div>
-		<?php 
-		echo "<input type='text' name='batch_id' value=".$batch_id.">";
-		?>
-		</div>
-		<br/><br/>
 
 		<div class="ui labeled input">
 		<div class="ui label">
