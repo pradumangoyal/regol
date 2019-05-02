@@ -53,7 +53,7 @@
 	// $account = mysqli_query($link, $sql6);
 	// while ($row = $account->fetch_assoc()) {
  //    	$account_number = $row['account_number'];
-	}
+	// }
 
 	$sql7 = "SELECT  physical_disability from student where enrollment_no='$_SESSION[enrollment_no]'";
 	$physical_disab = mysqli_query($link, $sql7);
