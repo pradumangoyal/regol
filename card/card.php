@@ -35,7 +35,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "SELECT * FROM student where enrollment_no=". $_POST["enrollment"]. ";";
 $result = $conn->query($sql);
 if ($result->num_rows > 0){ 
-	while($row = $result->fetch_assoc()) {
+    while($row = $result->fetch_assoc()) {
 		$sinfo = $row;
 	}
 }
@@ -71,6 +71,7 @@ if ($result1->num_rows > 0) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $card_type[$_POST["category"]] ?></title>
+    <link rel="icon" href="/regol/favicon.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/card.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/card.css" media="print" />

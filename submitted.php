@@ -53,6 +53,7 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 <html>
 <head>
 	<title>Verification Page</title>
+    <link rel="icon" href="/regol/favicon.png" type="image/png">
 	<link rel="stylesheet" type="text/css" href="verify.css">
     <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
 	
