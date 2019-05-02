@@ -230,7 +230,7 @@ if ($result1->num_rows > 0) {
                         <div class='field-11'>
                             <span class='field_heading'>Student's E-Mail: </span>
                             <span class='field_detail'>
-                            	email-personal@cc.in
+                            <?php echo $pinfo["email_address"] ?>
                             </span>
                         </div>
                     </li>
@@ -300,7 +300,9 @@ if ($result1->num_rows > 0) {
                             </div>
                             <div class="field-11 field-small">
                                 <span class='field_heading'>E-Mail: </span>
-                                <span class='field_detail'>mother@ccmail.in</span>
+                                <span class='field_detail'>
+                                <?php echo $minfo["email_address"] ?>                                
+                                </span>
                             </div>
                         </div>
                         <div class='field-full'>

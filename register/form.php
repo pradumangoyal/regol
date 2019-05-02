@@ -4,68 +4,35 @@
 
 	session_start();
 
-	// echo $_SESSION["course_id"];
-
-	$host = "localhost";
-	$dbusername = "regol";
-	$dbpassword = "regol";
-	$dbname = "regol";
-
-	$dept_name = "";
-
-	$link = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
-	if (!$link) {
-	    die('Could not connect: ' . mysql_error());
+	$servername = "localhost";
+	$username = "regol";
+	$password = "regol";
+	
+	// Create connection
+	$conn = new mysqli($servername, $username, $password);
+	
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	} $sql = "USE regol";
+	if ($conn->query($sql) === TRUE) {
+		echo "";
+	} else {
+		echo "Error creating database: " . $conn->error;
 	}
-	// mysql_select_db($dbname);
-
-	// $sql1 = "SELECT course_id from student WHERE enrollment_no='$_SESSION[enrollment_no]'";
-	// $course_id = mysqli_query($link, $sql1);
-	// while ($row = $course_id->fetch_assoc()) {
- //    	$_SESSION["course_id"] = $row['course_id'];
-	// }
-
-	$sql2 = "SELECT batch_id from batch where course_id='$_SESSION[course_id]'";
-	$batch = mysqli_query($link, $sql2);
-	while ($row = $batch->fetch_assoc()) {
-    	$batch_id = $row['batch_id'];
+	
+	$sql = "SELECT * FROM student where enrollment_no=". $_SESSION["enrollment_no"]. ";";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0){ 
+		while($row = $result->fetch_assoc()) {
+			$sinfo = $row;
+		}
 	}
-
-	$sql3 = "SELECT bhawan_name from student WHERE enrollment_no='$_SESSION[enrollment_no]'";
-	$bhawan = mysqli_query($link, $sql3);
-	while ($row = $bhawan->fetch_assoc()) {
-    	$bhawan_name = $row['bhawan_name'];
-	}
-
-	$sql4 = "SELECT room_number from student where enrollment_no='$_SESSION[enrollment_no]'";
-	$room = mysqli_query($link, $sql4);
-	while ($row = $room->fetch_assoc()) {
-    	$room_number = $row['room_number'];
-	}
-
-	// $sql5 = "SELECT  bank_name from student where enrollment_no='$_SESSION[enrollment_no]'";
-	// $bank = mysqli_query($link, $sql5);
-	// while ($row = $bank->fetch_assoc()) {
- //    	$bank_name = $row['bank_name'];
-	// }
-
-	// $sql6 = "SELECT  account_number from student where enrollment_no='$_SESSION[enrollment_no]'";
-	// $account = mysqli_query($link, $sql6);
-	// while ($row = $account->fetch_assoc()) {
- //    	$account_number = $row['account_number'];
-	// }
-
-	$sql7 = "SELECT  physical_disability from student where enrollment_no='$_SESSION[enrollment_no]'";
-	$physical_disab = mysqli_query($link, $sql7);
-	while ($row = $physical_disab->fetch_assoc()) {
-    	$physical_disability = $row['physical_disability'];
-	}
-
+	
+	$batch_id = $sinfo['batch_id'];
 	$bhawan_name = $sinfo['bhawan_name'];
 	$room_number = $sinfo['room_number'];
 	$course_id = $sinfo['course_id'];
-	$batch_id = $sinfo['batch_id'];
-
 
 	$sql = "SELECT * FROM course where course_id=".$course_id. ";";
 	$result = $conn->query($sql);
@@ -74,6 +41,7 @@
 			$cinfo = $row;
 		}
 	}
+
 	$dept_name = $cinfo['dept_name'];
 	$degree_name = $cinfo['degree_name'];
 	$course_name = $cinfo['course_name'];
@@ -85,7 +53,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Verification Page</title>
+	<title>Regol</title>
     <link rel="icon" href="/regol/favicon.png" type="image/png">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
@@ -339,7 +307,7 @@
 		<div class="ui label">
 		Course ID: 
 		</div>
-		<input type="text" name="course_id" value= <?php echo $_SESSION["course_id"] ?> readonly>
+		<input type="text" name="course_id" value= <?php echo $course_id ?> readonly>
 		</div>
 		<br/><br/>
 
@@ -426,14 +394,6 @@
 		Account Number: 
 		</div>
 		<input type="text" name="account_number">
-		</div>
-		<br/><br/>
-
-		<div class="ui labeled input">
-		<div class="ui label">
-		Physical Disability: 
-		</div>
-		<input type="text" name="physical_disability" value= <?php echo $physical_disability ?> readonly>
 		</div>
 		<br/><br/>
 

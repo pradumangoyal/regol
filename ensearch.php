@@ -29,7 +29,7 @@ if ($conn->query($sql) === TRUE) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Verification Page</title>
+	<title>Regol</title>
     <link rel="icon" href="/regol/favicon.png" type="image/png">    
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
