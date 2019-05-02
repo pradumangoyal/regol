@@ -93,32 +93,73 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">    
     <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .middle {
+            flex-grow: 1;
+        }
+        .header-container {
+            display: flex;
+            width: 100%;
+        }
+        .gutter-space {
+            flex-grow: 1;
+        }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Login</h2>
+<div class="ui attached segment header-container">
+        <div>
+            <h2 class="ui header">
+                <i class="edit icon"></i>
+                <div class="content">
+                <a href='/regol/admin.php'>
+                    Regol
+                </a>
+                </div>
+            </h2>  
+        </div>
+    </div>
+    <div class="ui container middle">
+        <div class="ui segment basic">
+        <h2>Admin login</h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
+        <div class="ui labeled input">
+                <div class="ui label">
+                    Username
+                </div>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+            </div>
+            <br/>
+            <br/>               
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Password
+                </div>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
+            </div>    
+            <br/>
+            <br/>
+                <input type="submit" class="ui button" value="Login">
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
+        </div>
+    </div>
+    <div class="ui attached segment header-container">
+    Regol &copy; 2019
     </div>    
 </body>
 </html>

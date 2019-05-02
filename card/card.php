@@ -39,7 +39,7 @@ if ($result->num_rows > 0){
 		$sinfo = $row;
 	}
 } else {
-    header("location: download.php");
+    header("location: /regol/download.php");
 	exit;
 }
 
