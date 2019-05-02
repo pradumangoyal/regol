@@ -18,28 +18,30 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating database: " . $conn->error;
 }
-$sql = "SELECT * FROM STUDENT where enrollment_no=". $_POST["Enno"]. ";";
+
+$sql = "SELECT * FROM verified where enrollment_no=". $_POST["Enno"]. ";";
 $result = $conn->query($sql);
-if ($result->num_rows > 0){ 
+if ($result->num_rows > 0){
+	while($row = $result->fetch_assoc()) {
+		$verifiedinfo = $row;
+	}
+}
+
+$sql = "SELECT * FROM student where enrollment_no=". $_POST["Enno"]. ";";
+$result = $conn->query($sql);
+if ($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
 		$sinfo = $row;
 	}
-} else {
-	header("location: /regol/ensearch.php");
-    exit;
 }
 $en=$_POST["Enno"];
 $id=$sinfo["person_id"];
-
-$sql = "SELECT * FROM PERSONAL_INFO where person_id=". $id.";";
+$sql = "SELECT * FROM personal_info where person_id=". $id.";";
 $result1 = $conn->query($sql);
 if ($result1->num_rows > 0) { 
 	while($row1 = $result1->fetch_assoc()) {
 		$pinfo = $row1;
 	}
-}	else {
-	header("location: /regol/ensearch.php");
-    exit;
 }
 
 
@@ -145,7 +147,14 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 						</table>
 					</td>
 					<td>
-						<input type="checkbox" name="pdetails"> Verified
+					<?php 
+					if($verifiedinfo["personal_info_verified"]==1){
+						echo "<input type='checkbox' name='pdetails' checked > Verified </input>";
+					} else {
+						echo "<input type='checkbox' name='pdetails' > Verified </input>";
+					}
+					?>
+						
 					</td>
 				</tr>
 				<tr>
@@ -162,13 +171,20 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 						</table>
 					</td>
 					<td>
-						<input type="checkbox" name="sdetails"> Verified
+					<?php 
+					if($verifiedinfo["student_info_verified"]==1){
+						echo "<input type='checkbox' name='sdetails' checked > Verified </input>";
+					} else {
+						echo "<input type='checkbox' name='sdetails' > Verified </input>";
+					}
+					?>
 					</td>
 				</tr>				
 				</tbody>
 			</table>
 		</div>
-		<input type="Submit" name="Submit">
+		<br/>
+		<input type="Submit" name="Submit" class="ui button positive">
 	</form>
 	</div>
 </div>

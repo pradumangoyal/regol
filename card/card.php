@@ -32,21 +32,18 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating database: " . $conn->error;
 }
-$sql = "SELECT * FROM STUDENT where enrollment_no=". $_POST["enrollment"]. ";";
+$sql = "SELECT * FROM student where enrollment_no=". $_POST["enrollment"]. ";";
 $result = $conn->query($sql);
 if ($result->num_rows > 0){ 
 	while($row = $result->fetch_assoc()) {
 		$sinfo = $row;
 	}
-} else {
-    header("location: /regol/download.php");
-	exit;
 }
 
 $person_id=$sinfo["person_id"];
 $course_id=$sinfo["course_id"];
 
-$sql = "SELECT * FROM PERSONAL_INFO where person_id=". $person_id.";";
+$sql = "SELECT * FROM personal_info where person_id=". $person_id.";";
 $result1 = $conn->query($sql);
 if ($result1->num_rows > 0) { 
 	while($row1 = $result1->fetch_assoc()) {

@@ -84,7 +84,6 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
                 <label>Enrollment No.</label>
                 </div>
                 <input type="text" name="enrollment" class="form-control">
-                <span class="help-block"><?php echo $username_err; ?></span>
             </div>
             <br/>
             <br/>

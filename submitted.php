@@ -24,16 +24,24 @@ if(isset($_POST["pdetails"]))
 	$pdetails = $_POST["pdetails"];
 if(isset($_POST["sdetails"]))
 	$sdetails = $_POST["sdetails"];
+
 if($pdetails == "on")
 {
-	$sql="UPDATE VERIFIED SET PERSONAL_INFO='1' WHERE ENROLLMENT_NO=".$_POST["enrollment"].";";
+	$sql="UPDATE verified SET personal_info_verified='1' WHERE enrollment_no=".$_POST["enrollment"].";";
+	$conn->query($sql);
+} else {
+	$sql="UPDATE verified SET personal_info_verified='0' WHERE enrollment_no=".$_POST["enrollment"].";";
 	$conn->query($sql);
 }
 if($sdetails == "on")
 {
-	$sql="UPDATE VERIFIED SET STUDENT_INFO='1' WHERE ENROLLMENT_NO=".$_POST["enrollment"].";";
+	$sql="UPDATE verified SET student_info_verified='1' WHERE enrollment_no=".$_POST["enrollment"].";";
+	$conn->query($sql);
+} else {
+	$sql="UPDATE verified SET student_info_verified='0' WHERE enrollment_no=".$_POST["enrollment"].";";
 	$conn->query($sql);
 }
+
 if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
     header("location: login.php");
     exit;
@@ -46,19 +54,41 @@ if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
 <head>
 	<title>Verification Page</title>
 	<link rel="stylesheet" type="text/css" href="verify.css">
+    <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
 	
 </head>
 <body>
+<div class="ui container">
+<div class="ui segment basic">
 <h1>
 	Your Response Has Been Recorded!
 </h1>
 <div id="verify">
-	<form method="POST" action="ensearch.php">
-		<input type="Submit" name="Search another Entry">
-	</form>
-	<form method="POST" action="login.php">
-		<button>LogOut</button>
-	</form>
+	<table class="ui celled table">
+	<tbody>
+	<tr>
+	<td>Personal info verified</td>
+	<td><?php if($pdetails == "on") {
+		echo "Verified";
+	} else {
+		echo "Unverified";
+	} ?></td>
+	</tr>
+	<tr>
+	<td>Student info verified</td>
+	<td><?php if($sdetails == "on") {
+		echo "Verified";
+	} else {
+		echo "Unverified";
+	} ?></td>
+	</tr>
+	</tbody>
+	</table>
+	<button onclick="location.href = '/regol/ensearch.php'">
+	Verify more
+	</button>
+</div>
+</div>
 </div>
 </body>
 </html>
