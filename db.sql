@@ -27,7 +27,8 @@ CREATE TABLE users (
 -- Table `regol`.`person`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `regol`.`person` (
-  `person_id` INT NOT NULL,
+  `person_id` INT NOT NULL
+  `secret_key` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`person_id`))
 ENGINE = InnoDB;
  
@@ -167,7 +168,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `regol`.`secret_keys` (
   `enrollment_no` INT NOT NULL,
-  `secret_key` VARCHAR(8) NULL,
+  `secret_key` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`enrollment_no`),
   CONSTRAINT `secret_keys_enrollment_no`
     FOREIGN KEY (`enrollment_no`)
