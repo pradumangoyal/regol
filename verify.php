@@ -45,21 +45,6 @@ if ($result1->num_rows > 0) {
 }
 
 
-$target_dir = "uploads/";
-$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if(isset($_POST["upload"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "Image Uploaded";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
 if(!isset($_SESSION["adminloggedin"]) || $_SESSION["adminloggedin"] !== true){
     header("location: login.php");
     exit;
