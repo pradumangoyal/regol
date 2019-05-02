@@ -10,6 +10,7 @@
 <html>
 <head>
 	<title>Regol</title>
+    <link rel="icon" href="/regol/favicon.png" type="image/png">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
     <style type="text/css">

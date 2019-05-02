@@ -61,29 +61,24 @@
     	$physical_disability = $row['physical_disability'];
 	}
 
-	$sql8 = "SELECT  dept_name from course where course_id='$_SESSION[course_id]'";
-	$dept = mysqli_query($link, $sql8);
-	while ($row = $dept->fetch_assoc()) {
-    	$dept_name = $row['dept_name'];
-	}
+	$bhawan_name = $sinfo['bhawan_name'];
+	$room_number = $sinfo['room_number'];
+	$course_id = $sinfo['course_id'];
+	$batch_id = $sinfo['batch_id'];
 
-	$sql9 = "SELECT  degree_name from course where course_id='$_SESSION[course_id]'";
-	$degree = mysqli_query($link, $sql9);
-	while ($row = $degree->fetch_assoc()) {
-    	$degree_name = $row['degree_name'];
-	}
 
-	$sql10 = "SELECT  course_name from course where course_id='$_SESSION[course_id]'";
-	$course = mysqli_query($link, $sql10);
-	while ($row = $course->fetch_assoc()) {
-    	$course_name = $row['course_name'];
+	$sql = "SELECT * FROM course where course_id=".$course_id. ";";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0){ 
+		while($row = $result->fetch_assoc()) {
+			$cinfo = $row;
+		}
 	}
+	$dept_name = $cinfo['dept_name'];
+	$degree_name = $cinfo['degree_name'];
+	$course_name = $cinfo['course_name'];
+	$years = $cinfo['years'];
 
-	$sql11 = "SELECT  years from course where course_id='$_SESSION[course_id]'";
-	$year = mysqli_query($link, $sql11);
-	while ($row = $year->fetch_assoc()) {
-    	$years = $row['years'];
-	}
 
 ?>
 
@@ -91,6 +86,7 @@
 <html>
 <head>
 	<title>Verification Page</title>
+    <link rel="icon" href="/regol/favicon.png" type="image/png">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/semantic.min.css">
     <style type="text/css">
@@ -395,7 +391,9 @@
 		<div class="ui label">
 		Batch ID: 
 		</div>
-		<input type="text" name="batch_id" value= <?php echo $batch_id ?> readonly>
+		<?php 
+		echo "<input type='text' name='batch_id' value=".$batch_id.">";
+		?>
 		</div>
 		<br/><br/>
 
