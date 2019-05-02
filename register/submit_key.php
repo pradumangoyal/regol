@@ -19,7 +19,7 @@
 	}
 	// mysql_select_db($dbname);
 
-	$sql2 = "SELECT person_id from person where secret_key='$secret_key' and enrollment_no='$_SESSION[enrollment_no]'";
+	$sql2 = "SELECT person_id from student where enrollment_no='$_SESSION[enrollment_no]'";
 	$person_id = mysqli_query($link, $sql2);
 	while ($row = $person_id->fetch_assoc()) {
     	$_SESSION["person_id"] = $row['person_id'];
